@@ -6,15 +6,15 @@ export const ROUTES = [
     children: [
       {
         path: '',
-        component: import('@/pages/page.vue'),
+        component: () => import('@/pages/page.vue'),
       },
       {
         path: 'primevue-forms',
-        component: import('@/pages/primevue-forms/page.vue'),
+        component: () => import('@/pages/primevue-forms/page.vue'),
       },
       {
         path: 'vee-validate',
-        component: import('@/pages/vee-validate/page.vue'),
+        component: () => import('@/pages/vee-validate/page.vue'),
       },
     ],
   },

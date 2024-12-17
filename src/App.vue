@@ -1,18 +1,15 @@
 <template>
-  <header class="flex items-center justify-between">
-    <RouterLink
-      class="flex-1"
-      to="/"
-    >
+  <header class="flex items-center px-8 py-6">
+    <RouterLink to="/">
       <h1 class="text-2xl">
         Afu Vue Form
       </h1>
     </RouterLink>
-    <nav class="flex items-center justify-between">
+    <nav class="flex items-center justify-between gap-4">
       <RouterLink
         v-for="category in ROUTER_CATEGORIES"
         :key="category.name"
-        class="text-green-400 hover:text-green-500 hover:underline"
+        class="text-green-500 hover:text-green-400 hover:underline"
         :to="category.path"
       >
         {{ category.name }}
