@@ -83,17 +83,12 @@
       type="submit"
     />
   </form>
-  <FormResultDialog
-    v-if="dialogConfig.visible"
-    :data="dialogConfig.data"
-    @close="onCloseDialog"
-  />
 </template>
 
 <script lang="ts" setup>
 import AddressSelector from '@/components/address-selector.vue'
-import FormResultDialog from '@/components/form-result-dialog.vue'
 import NameAndAgeField from '@/components/name-and-age-field.vue'
+import { usePanelStore } from '@/stores/panel'
 import { toTypedSchema } from '@vee-validate/yup'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
@@ -109,6 +104,8 @@ import {
   type FormValues,
   schema,
 } from './schema'
+
+const { show: onShowDialog } = usePanelStore()
 
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: toTypedSchema(schema),
@@ -138,14 +135,6 @@ const protocolOptions = computed(() => {
 
 const { fields, push, remove: onRemovePerson } = useFieldArray<FormValues['personList'][number]>('personList')
 
-const dialogConfig = ref<{
-  visible: boolean
-  data: any
-}>({
-  visible: false,
-  data: null,
-})
-
 const onAddPerson = () => {
   push({
     name: undefined as unknown as string,
@@ -154,16 +143,6 @@ const onAddPerson = () => {
 }
 
 const onSubmit = handleSubmit((values) => {
-  dialogConfig.value = {
-    visible: true,
-    data: values,
-  }
+  onShowDialog(values)
 })
-
-const onCloseDialog = () => {
-  dialogConfig.value = {
-    visible: false,
-    data: null,
-  }
-}
 </script>

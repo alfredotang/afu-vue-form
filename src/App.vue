@@ -20,11 +20,20 @@
   <main class="mx-auto max-w-screen-sm p-8">
     <RouterView />
   </main>
+  <FormResultDialog
+    v-if="panelStore.visible"
+    :data="panelStore.data"
+    @close="panelStore.hide"
+  />
 </template>
 
 <script lang="ts" setup>
 import useRouteChecker from '@/composables/use-route-checker'
+import FormResultDialog from './components/form-result-dialog.vue'
 import { ROUTER_CATEGORIES } from './router'
+import { usePanelStore } from './stores/panel'
 
 const { isActiveChecker } = useRouteChecker()
+
+const panelStore = usePanelStore()
 </script>

@@ -53,15 +53,10 @@
       type="submit"
     />
   </Form>
-  <FormResultDialog
-    v-if="dialogConfig.visible"
-    :data="dialogConfig.data"
-    @close="onCloseDialog"
-  />
 </template>
 
 <script lang="ts" setup>
-import FormResultDialog from '@/components/form-result-dialog.vue'
+import { usePanelStore } from '@/stores/panel'
 import Form, { type FormSubmitEvent } from '@primevue/forms/form'
 import FormField from '@primevue/forms/formfield'
 import { yupResolver } from '@primevue/forms/resolvers/yup'
@@ -69,20 +64,14 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import Select from 'primevue/select'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { CITY_LIST } from './constants'
 import {
   type FormValues,
   schema,
 } from './schema'
 
-const dialogConfig = ref<{
-  visible: boolean
-  data: any
-}>({
-  visible: false,
-  data: null,
-})
+const store = usePanelStore()
 
 const cityOptions = computed(() => {
   return CITY_LIST.map(item => ({
@@ -94,16 +83,6 @@ const cityOptions = computed(() => {
 const onSubmit = ({ valid, values: _values }: FormSubmitEvent) => {
   const values = _values as FormValues
   if (!valid) return
-  dialogConfig.value = {
-    visible: true,
-    data: values,
-  }
-}
-
-const onCloseDialog = () => {
-  dialogConfig.value = {
-    visible: false,
-    data: null,
-  }
+  store.show(values)
 }
 </script>

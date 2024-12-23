@@ -1,4 +1,5 @@
 import theme from '@primevue/themes/aura'
+import { createPinia } from 'pinia'
 import PrimeVue from 'primevue/config'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -13,6 +14,8 @@ const router = createRouter({
   routes: ROUTES,
 })
 
+const pinia = createPinia()
+
 const app = createApp(App)
 app
   .use(router)
@@ -25,4 +28,5 @@ app
       },
     },
   })
+app.use(pinia)
   .mount('#app')
