@@ -1,4 +1,5 @@
 import * as y from 'yup'
+import { PROTOCOL_LIST } from './constants'
 
 export const schema = y.object({
   personList: y.array(
@@ -19,6 +20,7 @@ export const schema = y.object({
   })
     .required('required')
     .strict(),
+  protocol: y.string().required('required').oneOf(PROTOCOL_LIST),
 })
 
 export type FormValues = y.InferType<typeof schema>

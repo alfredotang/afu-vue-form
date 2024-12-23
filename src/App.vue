@@ -10,6 +10,7 @@
         v-for="category in ROUTER_CATEGORIES"
         :key="category.name"
         class="text-green-500 hover:text-green-400 hover:underline"
+        :class="{ 'font-bold': isActiveChecker(category.path) }"
         :to="category.path"
       >
         {{ category.name }}
@@ -22,5 +23,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ROUTER_CATEGORIES } from './constants/router'
+import useRouteChecker from '@/composables/use-route-checker'
+import { ROUTER_CATEGORIES } from './router'
+
+const { isActiveChecker } = useRouteChecker()
 </script>

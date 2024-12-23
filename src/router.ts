@@ -15,6 +15,16 @@ export const ROUTES = [
       {
         path: 'vee-validate',
         component: () => import('@/pages/vee-validate/page.vue'),
+        children: [
+          {
+            path: 'case-component',
+            component: () => import('@/pages/vee-validate/case-component/page.vue'),
+          },
+          {
+            path: 'case-composable',
+            component: () => import('@/pages/vee-validate/case-composable/page.vue'),
+          },
+        ],
       },
     ],
   },

@@ -1,9 +1,9 @@
-import Aura from '@primevue/themes/aura'
+import theme from '@primevue/themes/aura'
 import PrimeVue from 'primevue/config'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
-import { ROUTES } from './constants/router'
+import { ROUTES } from './router'
 import 'primeicons/primeicons.css'
 import './style.css'
 import './assets/font'
@@ -17,8 +17,9 @@ const app = createApp(App)
 app
   .use(router)
   .use(PrimeVue, {
+    // unstyle: true,
     theme: {
-      preset: Aura,
+      preset: theme,
       options: {
         darkModeSelector: false,
       },
