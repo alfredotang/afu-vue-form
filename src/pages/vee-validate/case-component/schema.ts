@@ -7,7 +7,7 @@ export const schema = y.object({
     }),
   }),
   links: y.array(
-    y.string().url().required('required'),
+    y.string().required('required'),
   )
     .required('required')
     .min(1, 'required')

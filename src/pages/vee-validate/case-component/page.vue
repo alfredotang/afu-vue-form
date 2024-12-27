@@ -7,12 +7,22 @@
     @submit="onSubmit"
   >
     <section>
-      <Field
+      <!-- <Field
         :as="InputText"
         name="hello.world.title"
         fluid
         :invalid="Boolean(errors?.title)"
-      />
+      /> -->
+      <Field
+        v-slot="{ field }"
+        name="hello.world.title"
+      >
+        <InputText
+          v-bind="field"
+          fluid
+          :invalid="Boolean(errors?.title)"
+        />
+      </Field>
       <ErrorMessage
         v-slot="{ message }"
         name="hello.world.title"
